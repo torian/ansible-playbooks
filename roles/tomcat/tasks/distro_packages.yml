@@ -1,0 +1,10 @@
+---
+
+- name: Tomcat | Distro packages
+  apt: pkg={{ item }} 
+    state=present
+    update_cache=yes
+    cache_valid_time=2592000
+  when: ansible_osfamily == 'Debian'
+  items: distro.pkgs
+

@@ -1,0 +1,15 @@
+---
+
+- name: Tomcat | Tomcat user
+  user:
+    name={{ tomcat.user.name }} uid={{ tomcat.user.uid }}
+    home={{ tomcat.user.home }}
+    state=present
+
+- name: Tomcat | Directory
+  file: 
+    dest={{ prefix }}
+    owner={{ tomcat.user.name }} group={{ tomcat.group.name }}
+    mode=0750
+    state=directory
+

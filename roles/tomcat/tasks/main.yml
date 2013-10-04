@@ -1,0 +1,8 @@
+---
+
+- include: from_source.yml
+  when_unset: $from_distro
+
+- include: from_distro.yml
+  when_set: $from_distro
+

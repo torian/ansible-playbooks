@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+  
+  tasks:
+
+    - name: Add User
+      user: name={{ item.name }} 
+        home={{ item.home }}
+        password={{ item.password}}
+        shell={{ item.shell}}
+      with_items: system_users
+
+    - name: Add authorized keys
+      authorized_key: user={{ item.name }} key="{{ lookup("file", item.key) }}"
+      with_items: system_users
+

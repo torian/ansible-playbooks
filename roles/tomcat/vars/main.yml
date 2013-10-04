@@ -1,0 +1,42 @@
+
+tomcat_mirror: http://apache.dattatec.com/tomcat
+
+prefix: /usr/local/java
+prefix_logdir: /var/log/tomcat
+prefix_symlink: /usr/local
+
+distro:
+  pkgs:
+    - tomcat7
+    - tomcat7-admin
+
+tomcat:
+  user: {
+    'name':  'tomcat',
+    'uid':   '601',
+    'home':  '/usr/local/tomcat',
+    'gecos': 'Tomcat user',
+  },
+
+  group: {
+    'name': 'tomcat',
+    'gid':  '601',
+  },
+
+  server: {
+    'port': '8005',
+    'admins': [ 'admin', 'admin' ],
+  },
+
+  catalina: {
+    'port': 9080,
+    'connectionTimeout': 36000,
+    'ajp13': {
+      'port': 9009,
+      'connectionTimeout': 36000,
+      'redirectPort': 8443,
+      'maxThreads': 200,
+    }
+
+  }
+

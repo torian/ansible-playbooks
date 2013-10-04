@@ -1,0 +1,7 @@
+---
+
+system_users:
+  - { 'name': 'torian', 'home': '/home/torian', 'password': '$1$4NsT6Tug$FlIRjrgGL8YgSVZxc4bP40', 'key': '../files/auth_keys/id_pub.torian', 'shell': '/bin/bash',}
+  - { 'name': 'pepito', 'home': '/home/pepito', 'password': '$1$9UAfSQYx$js5zroA2L/ccFlNA3iLTD1', 'key': '../files/auth_keys/id_pub.pepito', 'shell': '/bin/true',}
+  - { 'name': 'tomcat', 'home': '/home/tomcat', 'password': '$1$FhLGUkkn$r3PFIZXtKInwsQnwfX5sG/', 'key': '../files/auth_keys/id_pub.tomcat', 'shell': '/bin/false', }
+

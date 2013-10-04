@@ -1,0 +1,40 @@
+---
+
+- name: Tomcat | Java package
+  copy: src=soft/jdk-{{ java_version }}.tar.gz dest={{ prefix }}
+
+- name: Tomcat | Java uncompressing
+  shell: tar -xzf {{ prefix }}/jdk-{{ java_version }}.tar.gz -C {{ prefix }}
+
+- name: Tomcat | Java Ownership
+  command: chown -R root:root {{ prefix }}/jdk-{{ java_version }}
+
+
+- name: Tomcat | Download from source
+  get_url: url={{ tomcat_mirror }}/tomcat-{{ tomcat_version_major }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz dest={{ prefix }}
+
+- name: Tomcat | Extract Tomcat
+  shell: tar -xzf {{ prefix }}/apache-tomcat-{{ tomcat_version }}.tar.gz -C {{ prefix }}
+
+- name: Tomcat | Tomcat Ownership
+  command: "chown -R {{ tomcat.user.name }}:{{ tomcat.group.name }} {{ prefix }}/apache-tomcat-{{ tomcat_version }}"
+
+
+- name: Tomcat | Logdir
+  file:
+    dest={{ prefix_logdir }}/{{ tomcat_version }}
+    owner={{ tomcat.user.name }} group={{ tomcat.group.name }}
+    state=directory recurse=yes
+
+- name: Tomcat | Remove logdir
+  file: 
+    dest={{ prefix }}/apache-tomcat-{{ tomcat_version }}/logs
+    state=absent
+
+- name: Tomcat | Logdir symlink
+  file:
+    src={{ prefix_logdir }}/{{ tomcat_version }}
+    dest={{ prefix }}/apache-tomcat-{{ tomcat_version }}/logs
+    state=link
+    force=yes
+
